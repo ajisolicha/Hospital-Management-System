@@ -1,0 +1,3 @@
+<?php
+ $title="Rekam Medis";
+?>
