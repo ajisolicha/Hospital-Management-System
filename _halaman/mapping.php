@@ -76,17 +76,22 @@ $dbconfig = mysqli_select_db($connection,$db_name);
 				<body oncontextmenu="return false;">
 					<div class="stand">
 						<?php
-						//Get Time Condition
+					//A_B_Get Time Condition
 						$ts1 = strtotime($row['timestamp']);
 						$ts2 = strtotime($row_2['timestamp']); 
-						$time_diff  = $ts1 - $ts2;
+						$t_s = strtotime("now");
+						// get time diff
+						$time_diff  = $ts1 - $ts2; 
 						$time_diff2 = $ts2 - $ts1;
+						$t_s_1		= abs($t_s - $t_s_1);
+						$t_s_2		= abs($t_s - $t_s_2);
+						// Initial Variable
 						$object = array (0);
 						$posX =0;
 						$con = 0; //jika 1 kali pembacaan input
 						$lost = 0;
 						
-						// Time Condition Analysis
+					// C_Time Condition Analysis
 						if($time_diff > -20 && $time_diff2 < 20 && $time_diff <=0 && $time_diff2 >=0){
 							//Get Area Position
 							if($row['rfid_uid']==$row_2['rfid_uid']){// area 2
@@ -95,29 +100,27 @@ $dbconfig = mysqli_select_db($connection,$db_name);
 							}
 							else{
 								$object = array(1,3);
-								$posX = array(78,14);
+								$posX = array(14,78);
 								$con = 2 ; //jika lebih dari 1 pmebacaan input
 								// echo "jenis area:", $object[0], $object[1];
 							
 							}
 							//echo $posX[0];
 						}
-						else if($time_diff <= -20 && $time_diff > -40  && $time_diff2 > 20 && $time_diff2 < 40){
+						else if($time_diff <= -20 && $time_diff2 > 20){
 							$object = array(3);
-							$posX = 14;
+							$posX = 78;
 							//echo "jenis area:", $object[0];
 						}
-						else if($time_diff >= 20 && $time_diff < 40 && $time_diff2 < -20 && $time_diff2 > -40){
+						else if($time_diff >= 20 && $time_diff2 < -20){
 							$object= array(1);
-							$posX = 78;
+							$posX = 14;
 							// echo "jenis area:", $object[0];
 						}
 						else {
 							$object = array(4);
 							$lost = 1;
 						}
-						
-						//echo $object[1];
 
 						// List Object in Spesific area
 						foreach($object as $j){
